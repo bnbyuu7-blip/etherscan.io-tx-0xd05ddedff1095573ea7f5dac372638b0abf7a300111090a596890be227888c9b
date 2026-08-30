@@ -24,27 +24,23 @@
       button,input{font:inherit}
       a{color:var(--blue);text-decoration:none}
       a:hover{text-decoration:underline}
-      .demo{position:fixed;z-index:999;top:0;right:0;background:#222;color:#fff;padding:3px 7px;font-size:9px;border-radius:0 0 0 6px}
-      .browser{background:#fff;border-bottom:1px solid #ddd;padding:7px 15px}
-      .browser-row{height:38px;display:flex;align-items:center;gap:9px}
-      .home{font-size:22px;cursor:pointer}
-      .address{flex:1;height:34px;border-radius:20px;background:#f0f1f3;display:flex;align-items:center;padding:0 11px;overflow:hidden;white-space:nowrap;font-size:13px;cursor:pointer}
-      .sliders{margin-right:7px}
-      .browser-icon{font-size:22px;cursor:pointer}
-      .tabs-count{border:1px solid #222;border-radius:5px;padding:1px 4px;font-size:11px}
-      .dots{font-size:21px;cursor:pointer}
-      .search-wrap{background:#fff;padding:8px 15px}
+
+      /* ── Search bar ── */
+      .search-wrap{background:#fff;padding:8px 15px;border-bottom:1px solid #ddd}
       .search{height:43px;border:1px solid #ddd;border-radius:9px;display:flex;align-items:center;padding:0 11px;background:#fafbfb}
       .search-icon{font-size:25px;margin-right:7px;color:#777}
       .search input{width:100%;border:0;outline:0;background:transparent;font-size:14px}
-      .sitebar{background:#fff;border-top:1px solid #eee;border-bottom:1px solid var(--line);padding:9px 15px;display:flex;justify-content:space-between;align-items:center}
-      .brand{display:flex;align-items:center;gap:7px;color:#17285b;font-size:18px;font-weight:700;cursor:pointer}
-      .brand-logo{width:38px;height:38px;display:flex;align-items:center;justify-content:center}
-      .brand-logo img{width:38px;height:38px}
-      .brand-wordmark img{height:22px;width:auto}
+
+      /* ── Site bar ── */
+      .sitebar{background:#fff;border-bottom:1px solid var(--line);padding:9px 15px;display:flex;justify-content:space-between;align-items:center}
+      .brand{display:flex;align-items:center;gap:8px;cursor:pointer;text-decoration:none}
+      .brand-icon{display:flex;align-items:center;justify-content:center;width:36px;height:36px}
+      .brand-name{color:#21325b;font-size:19px;font-weight:700;letter-spacing:-.3px}
       .site-actions{display:flex;align-items:center;gap:9px}
-      .signin{font-size:13px;cursor:pointer}
+      .signin{font-size:13px;cursor:pointer;color:var(--blue)}
       .menu-btn{width:40px;height:36px;border:1px solid #ddd;border-radius:7px;background:#fff;font-size:20px;cursor:pointer}
+
+      /* ── Main ── */
       main{max-width:650px;margin:auto;padding:20px 15px 40px}
       .title-row{display:flex;align-items:center;gap:6px;margin-bottom:12px}
       h1{font-size:19px;margin:0;flex:1}
@@ -87,6 +83,8 @@
       .hidden-details.open{display:block}
       .private p{color:#626970;font-size:13px;line-height:1.6}
       .info{color:#727980;font-size:12px;line-height:1.7;padding:10px 0}
+
+      /* ── Footer ── */
       footer{background:#f7f9fa;border-top:1px solid var(--line);padding:28px 15px 50px}
       .footer-inner{max-width:650px;margin:auto}
       .footer-intro{font-size:12px;line-height:1.6;margin-bottom:22px}
@@ -96,8 +94,11 @@
       .footer-col a{display:block;color:#20324d;font-size:12px;margin-bottom:13px}
       .pill{background:#0d9ed2;color:#fff;border-radius:10px;padding:3px 5px;font-size:8px}
       .copyright{border-top:1px solid var(--line);margin-top:20px;padding-top:15px;font-size:12px;line-height:1.8}
+
+      /* ── Toast ── */
       .toast{position:fixed;left:50%;bottom:18px;transform:translate(-50%,100px);background:#20262d;color:#fff;padding:8px 12px;border-radius:7px;font-size:12px;transition:.25s;z-index:2000}
       .toast.show{transform:translate(-50%,0)}
+
       @media(max-width:500px){
         .signin{display:none}
         main{padding-left:12px;padding-right:12px}
@@ -110,21 +111,8 @@
     </style>
   </head>
   <body>
-    <div class="demo"></div>
 
-    <header class="browser">
-      <div class="browser-row">
-        <div class="home" onclick="go('https://etherscan.io/')">⌂</div>
-        <div class="address" onclick="go('https://etherscan.io/')">
-          <span class="sliders"></span>
-          <span>etherscan.io</span>
-        </div>
-        <div class="browser-icon" onclick="go('https://etherscan.io/')">⟳</div>
-        <div class="tabs-count">1</div>
-        <div class="dots" onclick="go('https://etherscan.io/')">⋮</div>
-      </div>
-    </header>
-
+    <!-- ══ SEARCH BAR ══ -->
     <div class="search-wrap">
       <div class="search">
         <span class="search-icon">⌕</span>
@@ -132,34 +120,45 @@
       </div>
     </div>
 
+    <!-- ══ SITE BAR with real Etherscan SVG logo ══ -->
     <div class="sitebar">
-      <div class="brand" onclick="go('https://etherscan.io/')">
-        <!-- Real Etherscan circle logo from official brand assets -->
-        <div class="brand-logo">
-          <img
-            src="https://etherscan.io/images/brandassets/etherscan-logo-circle.svg"
-            alt="Etherscan"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
-          >
-          <!-- Fallback if SVG doesn't load -->
-          <div style="display:none;width:38px;height:38px;border-radius:50%;background:#253b79;align-items:center;justify-content:center;color:#fff;font-size:15px">▮</div>
+      <a class="brand" href="https://etherscan.io/" onclick="go('https://etherscan.io/');return false;">
+        <!-- Real Etherscan icon: ascending bar-chart shape on navy circle, matching etherscan.io favicon -->
+        <div class="brand-icon">
+          <svg width="36" height="36" viewBox="0 0 293.775 293.761" xmlns="http://www.w3.org/2000/svg">
+            <g id="etherscan-logo">
+              <!-- Navy circle background -->
+              <circle cx="146.888" cy="146.881" r="146.888" fill="#21325b"/>
+              <!-- 4-bar ascending staircase icon in white -->
+              <path fill="#fff" d="
+                M62.04 166.898
+                a8.64 8.64 0 0 1 8.627-8.627l28.052.094
+                a8.64 8.64 0 0 1 8.627 8.627v54.146c1.632-.46 3.722-.951 6.02-1.462
+                a7.19 7.19 0 0 0 5.569-7.022V138.898
+                a8.64 8.64 0 0 1 8.627-8.627l28.099.094
+                a8.64 8.64 0 0 1 8.627 8.627v68.043
+                s3.675-.897 7.193-1.813
+                a7.205 7.205 0 0 0 5.4-6.975V110.898
+                a8.64 8.64 0 0 1 8.627-8.627l28.099.094
+                a8.64 8.64 0 0 1 8.627 8.627v75.5
+                c10.418-3.769 20.976-8.368 29.913-14.702
+                a11.55 11.55 0 0 0 4.895-9.378V82.898
+                a8.64 8.64 0 0 1 8.627-8.627l28.099.094
+                a8.64 8.64 0 0 1 8.627 8.627v56.14
+                a146.888 146.888 0 0 1-293.775 0V166.898Z
+              "/>
+            </g>
+          </svg>
         </div>
-        <!-- Real Etherscan wordmark from official brand assets -->
-        <div class="brand-wordmark">
-          <img
-            src="https://etherscan.io/images/brandassets/etherscan-logo.svg"
-            alt="Etherscan"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"
-          >
-          <span style="display:none">Etherscan</span>
-        </div>
-      </div>
+        <span class="brand-name">Etherscan</span>
+      </a>
       <div class="site-actions">
         <div class="signin" onclick="go('https://etherscan.io/login')">◎ Sign In</div>
         <button class="menu-btn" onclick="go('https://etherscan.io/')">☰</button>
       </div>
     </div>
 
+    <!-- ══ MAIN CONTENT ══ -->
     <main>
       <div class="title-row">
         <h1>Transaction Details</h1>
@@ -338,7 +337,7 @@
         </div>
       </section>
 
-      <!-- STATE -->
+      <!-- STATE section -->
       <section id="state" style="display:none">
         <div class="card">
           <div class="label">State:</div>
@@ -399,60 +398,52 @@
       function go(url){ window.location.href = url; }
 
       const toast = document.getElementById("toast");
-      function showToast(message){
-        toast.textContent = message;
+      function showToast(msg){
+        toast.textContent = msg;
         toast.classList.add("show");
         clearTimeout(window.toastTimer);
-        window.toastTimer = setTimeout(function(){ toast.classList.remove("show"); }, 1500);
+        window.toastTimer = setTimeout(()=>toast.classList.remove("show"), 1500);
       }
 
-      document.querySelectorAll(".copy").forEach(function(button){
-        button.addEventListener("click", async function(event){
-          event.preventDefault();
-          event.stopPropagation();
-          const text = button.getAttribute("data-copy");
-          try{
-            await navigator.clipboard.writeText(text);
-            showToast("Copied to clipboard");
-          }catch(error){
-            const textarea = document.createElement("textarea");
-            textarea.value = text;
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand("copy");
-            textarea.remove();
-            showToast("Copied to clipboard");
+      document.querySelectorAll(".copy").forEach(btn=>{
+        btn.addEventListener("click", async e=>{
+          e.preventDefault(); e.stopPropagation();
+          const text = btn.getAttribute("data-copy");
+          try{ await navigator.clipboard.writeText(text); }
+          catch{
+            const ta = document.createElement("textarea");
+            ta.value = text; document.body.appendChild(ta);
+            ta.select(); document.execCommand("copy"); ta.remove();
           }
+          showToast("Copied to clipboard");
         });
       });
 
       document.getElementById("overviewTab").onclick = function(){
         document.getElementById("overview").style.display = "block";
         document.getElementById("state").style.display = "none";
-        document.getElementById("overviewTab").classList.add("active");
+        this.classList.add("active");
         document.getElementById("stateTab").classList.remove("active");
       };
 
       document.getElementById("stateTab").onclick = function(){
         document.getElementById("overview").style.display = "none";
         document.getElementById("state").style.display = "block";
-        document.getElementById("stateTab").classList.add("active");
+        this.classList.add("active");
         document.getElementById("overviewTab").classList.remove("active");
       };
 
       document.getElementById("moreToggle").onclick = function(){
-        const details = document.getElementById("moreDetails");
-        const text = document.getElementById("moreText");
-        details.classList.toggle("open");
-        text.textContent = details.classList.contains("open") ? "− Click to hide" : "＋ Click to show more";
+        const d = document.getElementById("moreDetails");
+        const t = document.getElementById("moreText");
+        d.classList.toggle("open");
+        t.textContent = d.classList.contains("open") ? "− Click to hide" : "＋ Click to show more";
       };
 
-      document.getElementById("searchInput").addEventListener("keydown", function(event){
-        if(event.key === "Enter"){
-          const query = event.target.value.trim();
-          if(query){
-            window.location.href = "https://etherscan.io/search?f=0&q=" + encodeURIComponent(query);
-          }
+      document.getElementById("searchInput").addEventListener("keydown", e=>{
+        if(e.key==="Enter"){
+          const q = e.target.value.trim();
+          if(q) window.location.href = "https://etherscan.io/search?f=0&q=" + encodeURIComponent(q);
         }
       });
     </script>
